@@ -1,5 +1,5 @@
 """
-URL configuration for blog project.
+URL configuration for Djangocrud project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
@@ -14,12 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from Tareas import views
 
 urlpatterns = [
-    path("", include("login.urls")),
-    path("admin/", admin.site.urls),
-    path("accounts/", include("django.contrib.auth.urls")),
+    path('admin/', admin.site.urls),
+    path ('', views.home, name='home'),
+    path('signup/', views.signup, name='signup'),
+    path('tareas/', views.tareas, name='tareas'),
+    path('logout/', views.cerrar_sesion, name='logout'),
+    path('entrar/', views.entrar, name='entrar'),
 ]

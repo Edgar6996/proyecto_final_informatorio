@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Iniciar Sesi    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }ecto Django{% endblock %}
+
+{% block breadcrumb %}
+    🏠 <a href="{% url 'home' %}" style="color: #6c757d; text-decoration: none;">Inicio</a> 
+    <span style="margin: 0 8px;">›</span> 
+    <strong style="color: #007bff;">🔑 Iniciar Sesión</strong>
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Estilos específicos para la página de login */
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        margin: 20px 0;
+    }
+    
+    .login-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 450px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .login-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+        background-size: 400% 400%;
+        animation: gradient 3s ease infinite;
+    }
+    
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    .login-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .login-subtitle {
+        text-align: center;
+        color: #2d3748;
+        margin-bottom: 30px;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+    
+    .form-group {
+        margin-bottom: 25px;
+        position: relative;
+    }
+    
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #1a202c;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .form-input {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: #ffffff;
+        box-sizing: border-box;
+        color: #1a202c;
+        font-weight: 500;
+    }
+    
+    .form-input::placeholder {
+        color: #4a5568;
+        font-weight: 400;
+    }
+    
+    .form-input:focus {
+        outline: none;
+        border-color: #667eea;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .login-button {
+        width: 100%;
+        padding: 12px 24px;
+        background: #1877f2;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: none;
+        letter-spacing: normal;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        box-shadow: none;
+        position: relative;
+        text-shadow: none;
+    }
+
+    .login-button:hover {
+        background: #166fe5;
+        transform: none;
+        box-shadow: none;
+        letter-spacing: normal;
+    }
+
+    .login-button:active {
+        background: #1464d0;
+        transform: none;
+        box-shadow: none;
+        transition: background-color 0.1s ease;
+    }
+    
+    /* Remover animaciones innecesarias */
+    
+    .error-message {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 500;
+        box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        animation: shake 0.5s ease-in-out;
+    }
+    
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+    }
+    
+    .signup-link {
+        text-align: center;
+        margin-top: 25px;
+        padding: 16px;
+        background: #f8f9fa;
+        border-radius: 6px;
+        border: 1px solid #dadde1;
+    }
+    
+    .signup-link p {
+        margin: 0;
+        color: #65676b;
+        font-size: 14px;
+        font-weight: 400;
+    }
+    
+    .signup-link a {
+        color: #1877f2;
+        text-decoration: none;
+        font-weight: 600;
+        text-transform: none;
+        letter-spacing: normal;
+        transition: color 0.2s ease;
+        padding: 8px 16px;
+        border-radius: 4px;
+    }
+    
+    .signup-link a:hover {
+        color: #166fe5;
+        text-decoration: underline;
+        text-shadow: none;
+        background: transparent;
+        transform: none;
+    }
+    
+    .icon-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .login-icon {
+        font-size: 4rem;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .login-card {
+            margin: 10px;
+            padding: 25px;
+        }
+        
+        .login-title {
+            font-size: 2rem;
+        }
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-card">
+        <!-- Icono animado -->
+        <div class="icon-container">
+            <div class="login-icon">🔐</div>
+        </div>
+        
+        <!-- Título principal -->
+        <h1 class="login-title">Iniciar Sesión</h1>
+        <p class="login-subtitle">Accede a tu cuenta para continuar</p>
+        
+        <!-- Mostrar errores -->
+        {% if error %}
+            <div class="error-message">
+                ⚠️ {{ error }}
+            </div>
+        {% endif %}
+        
+        <!-- Formulario de login -->
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Campo Usuario -->
+            <div class="form-group">
+                <label for="username" class="form-label">👤 Usuario</label>
+                <input type="text" 
+                       name="username" 
+                       id="username" 
+                       class="form-input"
+                       placeholder="Ingresa tu nombre de usuario"
+                       required>
+            </div>
+            
+            <!-- Campo Contraseña -->
+            <div class="form-group">
+                <label for="password" class="form-label">🔒 Contraseña</label>
+                <input type="password" 
+                       name="password" 
+                       id="password" 
+                       class="form-input"
+                       placeholder="Ingresa tu contraseña"
+                       required>
+            </div>
+            
+            <!-- Botón de envío -->
+            <button type="submit" class="login-button">
+                Iniciar sesión
+            </button>
+        </form>
+        
+        <!-- Enlace de registro -->
+        <div class="signup-link">
+            <p>¿No tienes cuenta? <a href="{% url 'signup' %}">Crear cuenta</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

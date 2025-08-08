@@ -1,0 +1,474 @@
+<!-- 
+=============================================================================
+TEMPLATE BASE - ESTRUCTURA PRINCIPAL DE TODA LA APLICACIÓN
+=============================================================================
+Este template define la estructura HTML común que comparten todas las páginas.
+Incluye la navegación, estilos básicos y el contenido dinámico.
+-->
+
+{% load static %} <!-- Cargar archivos estáticos -->
+
+<!DOCTYPE html>
+<html lang="es" id="html-root"> <!-- Idioma español para mejor accesibilidad -->
+<head>
+    <!-- Metadatos básicos para el navegador -->
+    <meta charset="UTF-8"> <!-- Codificación de caracteres UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design -->
+    <title>{% block title %}Proyecto Django{% endblock %}</title> <!-- Título que aparece en la pestaña del navegador -->
+    
+    <!-- Tailwind CSS desde CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración personalizada de Tailwind -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Habilitar modo oscuro con clases
+            theme: {
+                extend: {
+                    colors: {
+                        'game-primary': '#667eea',
+                        'game-secondary': '#764ba2',
+                        'game-accent': '#f093fb',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Estilos personalizados para estrellas -->
+    <style>
+        .star-filled {
+            color: #eab308 !important;
+            text-shadow: 0 0 3px rgba(0,0,0,0.6) !important;
+            font-weight: bold !important;
+        }
+        .star-empty {
+            color: #d1d5db !important;
+            font-weight: normal !important;
+        }
+        .rating-stars {
+            display: inline-flex;
+            align-items: center;
+        }
+        .rating-stars .star {
+            font-size: inherit;
+            line-height: 1;
+        }
+        
+        /* Estilos específicos para estrellas doradas */
+        .star-gold {
+            color: #fbbf24 !important;
+            text-shadow: 0 0 4px rgba(251, 191, 36, 0.7) !important;
+            filter: drop-shadow(0 0 2px rgba(251, 191, 36, 0.8)) !important;
+        }
+        
+        /* Estilos específicos para estrellas grises */
+        .star-gray {
+            color: #9ca3af !important;
+            opacity: 0.6;
+        }
+    </style>
+    
+    <!-- Enlace al archivo CSS estático -->
+    <link rel="stylesheet" type="text/css" href="{% static 'Tareas/css/styles.css' %}">
+    
+    <style>
+        /* Variables CSS para modo oscuro */
+        :root {
+            --bg-primary: #f8f9fa;
+            --bg-nav: #343a40;
+            --text-primary: #212529;
+            --text-nav: #ffffff;
+            --border-color: rgba(0,0,0,0.1);
+            --hover-bg: rgba(255,255,255,0.1);
+        }
+        
+        .dark {
+            --bg-primary: #1f2937;
+            --bg-nav: #111827;
+            --text-primary: #f9fafb;
+            --text-nav: #f9fafb;
+            --border-color: rgba(255,255,255,0.1);
+            --hover-bg: rgba(255,255,255,0.1);
+        }
+        
+        /* Resetear márgenes y padding del body */
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Estilos para la barra de navegación */
+        nav {
+            background-color: var(--bg-nav);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px var(--border-color);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Contenedor principal del menú */
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Grupo de enlaces de la izquierda */
+        .nav-left {
+            display: flex;
+            gap: 20px;
+        }
+        
+        /* Grupo de enlaces de la derecha */
+        .nav-right {
+            display: flex;
+            gap: 15px;
+        }
+        
+        /* Estilos para los elementos de la lista */
+        nav li {
+            display: inline;
+        }
+        
+        /* Estilos para los enlaces */
+        nav a {
+            color: var(--text-nav);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+            position: relative;
+        }
+        
+        /* Efecto hover para los enlaces */
+        nav a:hover {
+            background-color: var(--hover-bg);
+        }
+        
+        /* Botón de tema */
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+            color: var(--text-nav);
+        }
+        
+        .theme-toggle-btn:hover {
+            background-color: var(--hover-bg);
+        }
+        
+        /* Página activa */
+        nav a.active {
+            background: #007bff;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        nav a.active:hover {
+            background: #0056b3;
+        }
+        
+        /* Estilos simples para botones de autenticación (estilo YouTube/Facebook) */
+        .auth-btn {
+            border: 1px solid #dadde1 !important;
+            background: #f8f9fa !important;
+            color: #1c1e21 !important;
+            font-weight: 600 !important;
+            text-transform: none !important;
+            letter-spacing: normal !important;
+            box-shadow: none !important;
+            transition: background-color 0.2s ease !important;
+            position: relative !important;
+            overflow: hidden !important;
+            border-radius: 6px !important;
+            padding: 8px 16px !important;
+        }
+        
+        .auth-btn:hover {
+            background: #e4e6ea !important;
+            border-color: #dadde1 !important;
+            transform: none !important;
+            box-shadow: none !important;
+            color: #1c1e21 !important;
+        }
+        
+        .auth-btn:active {
+            transform: none !important;
+            box-shadow: none !important;
+            background: #d8dadf !important;
+        }
+        
+        /* Remover efectos de brillo */
+        .auth-btn::before {
+            display: none;
+        }
+        
+        .auth-btn:hover::before {
+            display: none;
+        }
+        
+        /* Estilo específico para el botón de registro (azul como Facebook) */
+        .register-btn {
+            background: #1877f2 !important;
+            border-color: #1877f2 !important;
+            color: white !important;
+            animation: none !important;
+        }
+        
+        .register-btn:hover {
+            background: #166fe5 !important;
+            border-color: #166fe5 !important;
+            box-shadow: none !important;
+            color: white !important;
+        }
+        
+        /* Estilo específico para el botón de login (gris como YouTube) */
+        .login-btn {
+            background: #f8f9fa !important;
+            border-color: #dadde1 !important;
+            color: #1c1e21 !important;
+            animation: none !important;
+            position: relative;
+        }
+        
+        .login-btn:hover {
+            background: #e4e6ea !important;
+            border-color: #dadde1 !important;
+            box-shadow: none !important;
+            color: #1c1e21 !important;
+        }
+        
+        /* Remover animaciones innecesarias */
+        
+        /* Responsive: En pantallas pequeñas, cambiar a vertical */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-left, .nav-right {
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- 
+    =============================================================================
+    BARRA DE NAVEGACIÓN PRINCIPAL MEJORADA
+    =============================================================================
+    Menú horizontal con elementos alineados: Inicio y Juegos a la izquierda,
+    Registrarse y Entrar a la derecha.
+    -->
+    <nav>
+        <ul>
+            <!-- ===== GRUPO DE ENLACES DE LA IZQUIERDA ===== -->
+            <div class="nav-left">
+                <li>
+                    <!-- Enlace a Inicio con indicador de página activa -->
+                    <a href="{% url 'home' %}" 
+                       class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                        🏠 Inicio
+                    </a>
+                </li>
+                
+                <li>
+                    <!-- Enlace a Juegos con indicador de página activa -->
+                    <!-- También se marca como activo en páginas relacionadas con juegos -->
+                    <a href="{% url 'tareas' %}" 
+                       class="{% if request.resolver_match.url_name == 'tareas' or request.resolver_match.url_name == 'detalle_juego' or request.resolver_match.url_name == 'crear_resena' %}active{% endif %}">
+                        🎮 Juegos
+                    </a>
+                </li>
+                
+                <li>
+                    <!-- Enlace a Acerca de con indicador de página activa -->
+                    <a href="{% url 'acerca_de' %}" 
+                       class="{% if request.resolver_match.url_name == 'acerca_de' %}active{% endif %}">
+                        ℹ️ Acerca de...
+                    </a>
+                </li>
+                
+                <li>
+                    <!-- Botón de modo oscuro/claro -->
+                    <button id="theme-toggle" 
+                            class="theme-toggle-btn flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            title="Cambiar modo de color">
+                        <!-- Icono del sol (se muestra en modo oscuro para cambiar a claro) -->
+                        <span id="sun-icon" class="text-xl">☀️</span>
+                        <!-- Icono de la luna (se muestra en modo claro para cambiar a oscuro) -->
+                        <span id="moon-icon" class="text-xl hidden">🌙</span>
+                    </button>
+                </li>
+            </div>
+            
+            <!-- ===== GRUPO DE ENLACES DE LA DERECHA ===== -->
+            <div class="nav-right">
+                <!-- 
+                =============================================================================
+                NAVEGACIÓN CONDICIONAL SEGÚN ESTADO DE AUTENTICACIÓN
+                =============================================================================
+                Django proporciona la variable 'user' automáticamente en todos los templates.
+                user.is_authenticated es True si el usuario ha iniciado sesión.
+                Los superusuarios tienen acceso directo al panel de administración.
+                -->
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                        <!-- ===== MENÚ PARA SUPERUSUARIOS ===== -->
+                        <li>
+                            <!-- Enlace al panel de administración -->
+                            <a href="/admin/" class="auth-btn">
+                                ⚙️ Panel Admin
+                            </a>
+                        </li>
+                        <li>
+                            <!-- Indicador de superusuario -->
+                            <span style="color: #28a745; font-weight: bold;">
+                                👑 Admin: {{ user.username }}
+                            </span>
+                        </li>
+                        <li>
+                            <!-- Botón para cerrar sesión -->
+                            <a href="{% url 'logout' %}" class="auth-btn">🚪 Logout</a>
+                        </li>
+                    {% else %}
+                        <!-- ===== MENÚ PARA USUARIOS NORMALES AUTENTICADOS ===== -->
+                        <li>
+                            <!-- Enlace al perfil del usuario -->
+                            <a href="{% url 'perfil' %}" 
+                               class="{% if request.resolver_match.url_name == 'perfil' or request.resolver_match.url_name == 'configuracion' %}active{% endif %}">
+                                👤 {{ user.username }}
+                            </a>
+                        </li>
+                        <li>
+                            <!-- Botón para cerrar sesión -->
+                            <a href="{% url 'logout' %}" class="auth-btn">🚪 Logout</a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <!-- ===== MENÚ PARA USUARIOS NO AUTENTICADOS ===== -->
+                    <li>
+                        <!-- Enlace para registrarse como nuevo usuario -->
+                        <a href="{% url 'signup' %}" 
+                           class="auth-btn register-btn {% if request.resolver_match.url_name == 'signup' %}active{% endif %}">
+                            Registrarse
+                        </a>
+                    </li>
+                    <li>
+                        <!-- Enlace para iniciar sesión -->
+                        <a href="{% url 'entrar' %}" 
+                           class="auth-btn login-btn {% if request.resolver_match.url_name == 'entrar' %}active{% endif %}">
+                            Iniciar sesión
+                        </a>
+                    </li>
+                {% endif %}
+            </div>
+        </ul>
+    </nav>
+    
+    <!-- 
+    =============================================================================
+    BREADCRUMB - INDICADOR DE UBICACIÓN
+    =============================================================================
+    Muestra al usuario en qué sección de la aplicación se encuentra
+    -->
+    <div style="background-color: #e9ecef; padding: 8px 15px; border-radius: 5px; margin-bottom: 20px; font-size: 14px; color: #6c757d;">
+        {% block breadcrumb %}
+            🏠 Inicio
+        {% endblock %}
+    </div>
+    
+    <!-- 
+    =============================================================================
+    CONTENIDO DINÁMICO DE CADA PÁGINA
+    =============================================================================
+    Este bloque será reemplazado por el contenido específico de cada template
+    que extienda este base.html usando la directiva extends de Django
+    -->
+    {% block content %}
+    {% endblock %}
+    
+    <!-- JavaScript para el modo oscuro -->
+    <script>
+        // Función para manejar el cambio de tema
+        function initThemeToggle() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlRoot = document.getElementById('html-root');
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+            
+            // Verificar tema guardado en localStorage o usar tema del sistema
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // Determinar tema inicial
+            let currentTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            
+            // Aplicar tema inicial
+            applyTheme(currentTheme);
+            
+            // Event listener para el botón de toggle
+            themeToggle.addEventListener('click', function() {
+                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+                applyTheme(currentTheme);
+                localStorage.setItem('theme', currentTheme);
+            });
+            
+            // Función para aplicar el tema
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    htmlRoot.classList.add('dark');
+                    sunIcon.classList.remove('hidden');  // Mostrar sol en modo oscuro
+                    moonIcon.classList.add('hidden');    // Ocultar luna en modo oscuro
+                    themeToggle.title = 'Cambiar a modo claro';
+                } else {
+                    htmlRoot.classList.remove('dark');
+                    sunIcon.classList.add('hidden');     // Ocultar sol en modo claro
+                    moonIcon.classList.remove('hidden'); // Mostrar luna en modo claro
+                    themeToggle.title = 'Cambiar a modo oscuro';
+                }
+            }
+            
+            // Escuchar cambios en la preferencia del sistema
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    currentTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(currentTheme);
+                }
+            });
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', initThemeToggle);
+        
+        // También inicializar inmediatamente para evitar flash
+        if (document.readyState === 'loading') {
+            // El DOM aún se está cargando
+            document.addEventListener('DOMContentLoaded', initThemeToggle);
+        } else {
+            // El DOM ya está listo
+            initThemeToggle();
+        }
+    </script>
+    
+    <!-- Enlace al archivo JavaScript estático (para estilos adicionales) -->
+    <script src="{% static 'Tareas/js/main.js' %}"></script>
+</body>
+</html>
