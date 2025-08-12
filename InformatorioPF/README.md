@@ -146,9 +146,9 @@ DATABASE_URL=postgresql://usuario:password@host:puerto/basedatos
 
 Este proyecto está bajo la Licencia MIT - ver el archivo `LICENSE` para detalles.
 
-## 👨‍💻 Autor
+## 👨‍💻 Autores
 
-**Pablo** - Proyecto Django de Gestión de Juegos
+**Grupo 5 - Informatorio** - Proyecto Django de Gestión de Juegos
 
 ## 📞 Soporte
 
