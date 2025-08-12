@@ -68,7 +68,7 @@ ProyectoDjango/
 ├── 📄 activar_entorno.sh           # Script de activación del entorno
 ├── 📄 setup.sh                     # Script de configuración
 ├── 🗃️ db.sqlite3                   # Base de datos
-├── 📁 Djangocrud/                  # Configuración principal de Django
+├── 📁 blogdejuego/                  # Configuración principal de Django
 │   ├── settings.py
 │   ├── urls.py
 │   ├── wsgi.py

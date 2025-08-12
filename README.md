@@ -72,7 +72,7 @@ python manage.py runserver
 
 ```
 ProyectoDjango/
-├── Djangocrud/          # Configuración principal del proyecto
+├── blogdejuego/          # Configuración principal del proyecto
 ├── Tareas/              # Aplicación principal (Juegos)
 │   ├── models.py        # Modelos: Juego, Categoria, Resena
 │   ├── views.py         # Vistas del sistema

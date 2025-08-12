@@ -1,5 +1,5 @@
 # =============================================================================
-# CONFIGURACIÓN DE URLs DEL PROYECTO DJANGOCRUD
+# CONFIGURACIÓN DE URLs DEL PROYECTO blogdejuego
 # =============================================================================
 """
 Este archivo define todas las rutas (URLs) de la aplicación web.
