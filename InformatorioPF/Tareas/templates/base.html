@@ -131,7 +131,7 @@ Incluye la navegación, estilos básicos y el contenido dinámico.
         /* Grupo de enlaces de la derecha */
         .nav-right {
             display: flex;
-            gap: 15px;
+            gap: 25px;
         }
         
         /* Estilos para los elementos de la lista */
@@ -267,6 +267,50 @@ Incluye la navegación, estilos básicos y el contenido dinámico.
                 text-align: center;
             }
         }
+
+        /* Botones principales de navegación */
+        .nav-link {
+            padding: 10px 20px; /* Más espacio */
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background-color 0.2s ease;
+        }
+        .nav-link:hover {
+            background-color: var(--hover-bg);
+        }
+
+    /* Achicar botones de navegación en pantallas chicas */
+    @media (max-width: 768px) {
+        .nav-link {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+    }
+    /* Más espacio entre enlaces en pantallas chicas */
+    @media (max-width: 768px) {
+        .nav-right {
+            gap: 25px; 
+        }
+    }
+
+    /* Responsive: en pantallas chicas centrar todo */
+    @media (max-width: 768px) {
+        nav {
+            flex-direction: column;
+            align-items:;
+        }
+        nav ul {
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        nav .flex.items-center.gap-6 {
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
@@ -277,14 +321,28 @@ Incluye la navegación, estilos básicos y el contenido dinámico.
     Menú horizontal con elementos alineados: Inicio y Juegos a la izquierda,
     Registrarse y Entrar a la derecha.
     -->
-    <nav>
-        <ul>
+    <nav class="flex flex-wrap i justify-between items-center px-4 py-2">
+
+        <div class="flex items-center gap-2">
+            <img src="{% static 'Tareas/img/icons/g5fondonegro.jpg' %}" 
+                alt="Logo de Gaming" 
+                class="w-12 mt-2 rounded-xl">
+        </div>
+
+        <!-- BOTÓN HAMBURGUESA SOLO VISIBLE EN MÓVILES -->
+        <button id="menu-btn" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white text-white" aria-label="Abrir menú">
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+
+        <!-- Ocultar menú en móviles, mostrar en md+ -->
+        <ul id="menu" class="hidden md:flex justify-end items-center gap-4">
             <!-- ===== GRUPO DE ENLACES DE LA IZQUIERDA ===== -->
-            <div class="nav-left">
                 <li>
                     <!-- Enlace a Inicio con indicador de página activa -->
                     <a href="{% url 'home' %}" 
-                       class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                        class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
                         🏠 Inicio
                     </a>
                 </li>
@@ -293,7 +351,7 @@ Incluye la navegación, estilos básicos y el contenido dinámico.
                     <!-- Enlace a Juegos con indicador de página activa -->
                     <!-- También se marca como activo en páginas relacionadas con juegos -->
                     <a href="{% url 'tareas' %}" 
-                       class="{% if request.resolver_match.url_name == 'tareas' or request.resolver_match.url_name == 'detalle_juego' or request.resolver_match.url_name == 'crear_resena' %}active{% endif %}">
+                        class="{% if request.resolver_match.url_name == 'tareas' or request.resolver_match.url_name == 'detalle_juego' or request.resolver_match.url_name == 'crear_resena' %}active{% endif %}">
                         🎮 Juegos
                     </a>
                 </li>
@@ -301,26 +359,16 @@ Incluye la navegación, estilos básicos y el contenido dinámico.
                 <li>
                     <!-- Enlace a Acerca de con indicador de página activa -->
                     <a href="{% url 'acerca_de' %}" 
-                       class="{% if request.resolver_match.url_name == 'acerca_de' %}active{% endif %}">
+                        class="{% if request.resolver_match.url_name == 'acerca_de' %}active{% endif %}">
                         ℹ️ Acerca de...
                     </a>
                 </li>
                 
-                <li>
-                    <!-- Botón de modo oscuro/claro -->
-                    <button id="theme-toggle" 
-                            class="theme-toggle-btn flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                            title="Cambiar modo de color">
-                        <!-- Icono del sol (se muestra en modo oscuro para cambiar a claro) -->
-                        <span id="sun-icon" class="text-xl">☀️</span>
-                        <!-- Icono de la luna (se muestra en modo claro para cambiar a oscuro) -->
-                        <span id="moon-icon" class="text-xl hidden">🌙</span>
-                    </button>
-                </li>
+
             </div>
             
             <!-- ===== GRUPO DE ENLACES DE LA DERECHA ===== -->
-            <div class="nav-right">
+            <div class="flex justify-end items-center gap-4">
                 <!-- 
                 =============================================================================
                 NAVEGACIÓN CONDICIONAL SEGÚN ESTADO DE AUTENTICACIÓN
@@ -353,7 +401,7 @@ Incluye la navegación, estilos básicos y el contenido dinámico.
                         <li>
                             <!-- Enlace al perfil del usuario -->
                             <a href="{% url 'perfil' %}" 
-                               class="{% if request.resolver_match.url_name == 'perfil' or request.resolver_match.url_name == 'configuracion' %}active{% endif %}">
+                                class="{% if request.resolver_match.url_name == 'perfil' or request.resolver_match.url_name == 'configuracion' %}active{% endif %}">
                                 👤 {{ user.username }}
                             </a>
                         </li>
@@ -367,16 +415,27 @@ Incluye la navegación, estilos básicos y el contenido dinámico.
                     <li>
                         <!-- Enlace para registrarse como nuevo usuario -->
                         <a href="{% url 'signup' %}" 
-                           class="auth-btn register-btn {% if request.resolver_match.url_name == 'signup' %}active{% endif %}">
+                            class="auth-btn register-btn {% if request.resolver_match.url_name == 'signup' %}active{% endif %}">
                             Registrarse
                         </a>
                     </li>
                     <li>
                         <!-- Enlace para iniciar sesión -->
                         <a href="{% url 'entrar' %}" 
-                           class="auth-btn login-btn {% if request.resolver_match.url_name == 'entrar' %}active{% endif %}">
+                            class="auth-btn login-btn {% if request.resolver_match.url_name == 'entrar' %}active{% endif %}">
                             Iniciar sesión
                         </a>
+                    <li>
+                    <!-- Botón de modo oscuro/claro -->
+                    <button id="theme-toggle" 
+                            class="flex justify-end items-center gap-4"
+                            title="Cambiar modo de color">
+                        <!-- Icono del sol (se muestra en modo oscuro para cambiar a claro) -->
+                        <span id="sun-icon" class="text-xl">☀️</span>
+                        <!-- Icono de la luna (se muestra en modo claro para cambiar a oscuro) -->
+                        <span id="moon-icon" class="text-xl hidden">🌙</span>
+                    </button>
+                </li>
                     </li>
                 {% endif %}
             </div>
@@ -468,6 +527,19 @@ Incluye la navegación, estilos básicos y el contenido dinámico.
         }
     </script>
     
+    <!-- NUEVO SCRIPT para menú hamburguesa -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+        });
+    </script>
+
+
     <!-- Enlace al archivo JavaScript estático (para estilos adicionales) -->
     <script src="{% static 'Tareas/js/main.js' %}"></script>
 </body>

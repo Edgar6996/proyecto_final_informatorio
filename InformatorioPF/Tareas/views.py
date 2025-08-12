@@ -690,7 +690,7 @@ def acerca_de(request):
     y el proyecto del Informatorio Chaco, incluyendo tecnologías actualizadas.
     """
     context = {
-        'desarrollador': 'Pablo Javier Fernandez',
+        'desarrollador': 'GRUPO 5',
         'institucion': 'Informatorio Chaco',
         'proyecto': 'Plataforma de Reseñas de Videojuegos',
         'año': '2025',
@@ -722,7 +722,7 @@ def acerca_de(request):
                 {'nombre': 'Sistema de Paginación', 'icono': '📄', 'descripcion': 'Navegación optimizada de contenido'},
                 {'nombre': 'Cache System', 'icono': '⚡', 'descripcion': 'Optimización de rendimiento'},
                 {'nombre': 'Formularios Validados', 'icono': '✅', 'descripcion': 'Validación robusta de datos'},
-            ]
+            ],
         }
     }
     return render(request, 'acerca_de.html', context)

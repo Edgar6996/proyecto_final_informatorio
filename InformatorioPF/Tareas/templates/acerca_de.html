@@ -28,26 +28,80 @@ Extiende el template base para mantener la navegación y estructura.
         ℹ️ Acerca de este Proyecto
     </h1>
     <p style="color: #6c757d; font-size: 1.2em; max-width: 600px; margin: 0 auto;">
-        Información sobre el desarrollo y el autor de esta plataforma de reseñas de videojuegos
+        Información sobre el desarrollo y autores de esta plataforma de reseñas de videojuegos
     </p>
 </div>
 
-<!-- ===== INFORMACIÓN DEL DESARROLLADOR ===== -->
+<!-- ===== INFORMACIÓN DE LOS DESARROLLADORES ===== -->
 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 15px; margin-bottom: 30px; color: white; text-align: center;">
-    <!-- Imagen del desarrollador -->
-    <div style="margin-bottom: 20px; display: flex; justify-content: center; align-items: center;">
+    <!-- Imagenes de los desarrolladores -->
+<div style="margin-bottom: 20px; display: flex relative; justify-content: center ; align-items: center;">
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; max-width: 900px; margin: auto; justify-items: center;">
+    <div style="text-align: center;">
         <img src="{% static 'Tareas/img/icons/pablo2.jpg' %}" 
-             alt="Pablo Javier Fernandez" 
-             style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.3); object-fit: cover; display: block; margin: 0 auto;">
+            alt="Pablo Javier Fernandez" 
+            style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.3); object-fit: cover;">
+        <p style="font-size: 1em; margin-top: 10px; opacity: 0.9;">Pablo Fernández</p>
     </div>
-    <h2 style="margin-bottom: 15px; font-size: 2em;">{{ desarrollador }}</h2>
-    <p style="font-size: 1.3em; margin-bottom: 20px; opacity: 0.9;">
-        Desarrollador Full Stack
-    </p>
+    <div style="text-align: center;">
+        <img src="{% static 'Tareas/img/icons/Nare.jpg' %}" 
+            alt="Cañete Valeria Narela" 
+            style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.3); object-fit: cover;">
+        <p style="font-size: 1em; margin-top: 10px; opacity: 0.9;">Narela  Cañete</p>
+    </div>
+    <div style="text-align: center;">
+        <img src="{% static 'Tareas/img/icons/Nadia.jpg' %}" 
+            alt="Nadia Fernandez Rey" 
+            style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.3); object-fit: cover;">
+        <p style="font-size: 1em; margin-top: 10px; opacity: 0.9;">Nadia Fernández Rey</p>
+    </div>
+    <div style="text-align: center;">
+        <img src="{% static 'Tareas/img/icons/Jesus.jpg' %}" 
+            alt="Escalante Jesus Emanuel" 
+            style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.3); object-fit: cover;">
+        <p style="font-size: 1em; margin-top: 10px; opacity: 0.9;">Jesús Escalante</p> 
+    </div> 
+    <div style="text-align: center;">
+        <img src="{% static 'Tareas/img/icons/Edgar.jpg' %}" 
+            alt="Fernández Edgardo" 
+            style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.3); object-fit: cover;">
+        <p style="font-size: 1em; margin-top: 10px; opacity: 0.9;">Edgardo Fernández</p>
+    </div>
+    <div style="text-align: center;">
+        <img src="{% static 'Tareas/img/icons/Diego.jpg' %}" 
+            alt="Diego Arenhardt" 
+            style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.3); object-fit: cover;">
+        <p style="font-size: 1em; margin-top: 10px; opacity: 0.9;">Daniel Obregón</p>
+    </div>
+    <div style="text-align: center;">
+        <img src="{% static 'Tareas/img/icons/Daniel.jpg' %}" 
+            alt="Diego" 
+            style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.3); object-fit: cover;">
+        <p style="font-size: 1em; margin-top: 10px; opacity: 0.9;"> Diego Arenhardt</p>
+    </div>
+    <div style="text-align: center;">
+        <img src="{% static 'Tareas/img/icons/Vani.jpg' %}" 
+            alt="Gutierrez Vanina" 
+            style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.3); object-fit: cover;">
+        <p style="font-size: 1em; margin-top: 10px; opacity: 0.9;">Vanina Gutierrez</p>
+    </div>
+    <div style="text-align: center;">
+        <img src="{% static 'Tareas/img/icons/Leonel.jpg' %}" 
+            alt="Benitez Arnaldo Leonel" 
+            style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.3); object-fit: cover;">
+        <p style="font-size: 1em; margin-top: 10px; opacity: 0.9;">Arnaldo Benitez</p>
+    </div>
+</div>
+
+
+
+
+
     <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; backdrop-filter: blur(10px);">
         <p style="font-size: 1.1em; margin: 0;">
-            🎓 Estudiante del <strong>{{ institucion }}</strong><br>
-            💻 Apasionado por la tecnología y los videojuegos<br>
+            🎓 Estudiantes del <strong>{{ institucion }}</strong><br>
+            💻 Apasionados por la tecnología y los videojuegos<br>
             🚀 Creando soluciones web innovadoras
         </p>
     </div>
@@ -62,9 +116,35 @@ Extiende el template base para mantener la navegación y estructura.
         <h3 style="color: #28a745; margin-bottom: 15px; text-align: center;">Sobre el Proyecto</h3>
         <p style="color: #6c757d; line-height: 1.6; text-align: center;">
             <strong>{{ proyecto }}</strong><br><br>
-            Una plataforma web desarrollada con Django que permite a los usuarios
-            explorar, reseñar y descubrir videojuegos de diferentes géneros y plataformas.
+                En esta plataforma web desarrollada con Django, cada integrante asumió un rol específico,
+                desempeñándose en las siguientes áreas, con el objetivo de permitir a los usuarios explorar, 
+                reseñar y descubrir videojuegos de diversos géneros y plataformas.
+
         </p>
+    
+        <div style="display: flex; color: #6c757d; line-height: 1.6;">
+        <strong style="color: #28a745;">🚀 Backend:</strong><br>
+        <ul style="margin-top: 10px; padding-left: 20px; list-style-type: none;">
+            <li>Fernández Pablo</li>            
+            <li>Fernández Edgardo David</li>
+            <li>Cañete Valeria Narela</li>
+            <li>Obregón  Roberto Daniel</li>
+            <li>Benitez Arnaldo Leonel</li>
+
+            
+        </ul>
+        </div>
+
+        <div style="display: flex; color: #6c757d; line-height: 1.6;">
+                <strong style="color: #dc3545;">🎨 Frontend:</strong><br>
+        <ul style=" margin-top: 10px; padding-left: 20px; list-style-type: none;">
+            <li>Fernández Rey Nadia</li>
+            <li>Escalante Jesús Emanuel</li>
+            <li>Arenhardt Diego Emanuel</li>
+            <li>Gutierrez Vanina Noemí</li>
+
+        </ul>
+        </div>
     </div>
 
     <!-- Card: Tecnologías -->
@@ -108,8 +188,8 @@ Extiende el template base para mantener la navegación y estructura.
     <!-- Enlace al campus del Informatorio -->
     <div style="margin-top: 20px;">
         <a href="https://campus-informatorio.chaco.gob.ar" 
-           target="_blank" 
-           style="display: inline-block; background: linear-gradient(45deg, #d84315, #bf360c); color: white; padding: 12px 25px; text-decoration: none; border-radius: 25px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(216, 67, 21, 0.3); font-weight: 500;">
+            target="_blank" 
+            style="display: inline-block; background: linear-gradient(45deg, #d84315, #bf360c); color: white; padding: 12px 25px; text-decoration: none; border-radius: 25px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(216, 67, 21, 0.3); font-weight: 500;">
             🎓 Visitar Campus Informatorio
         </a>
     </div>
@@ -138,15 +218,15 @@ Extiende el template base para mantener la navegación y estructura.
     
     <!-- Enlaces de contacto y redes -->
     <div style="margin-bottom: 20px;">
-        <a href="https://github.com/PabloFernandez3012" 
-           target="_blank" 
-           style="display: inline-block; background: linear-gradient(45deg, #333, #24292e); color: white; padding: 10px 20px; text-decoration: none; border-radius: 25px; margin: 5px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+        <a href="https://github.com/Edgar6996/proyecto_final_informatorio.git" 
+            target="_blank" 
+            style="display: inline-block; background: linear-gradient(45deg, #333, #24292e); color: white; padding: 10px 20px; text-decoration: none; border-radius: 25px; margin: 5px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
             💻 GitHub
         </a>
     </div>
     
     <div style="color: #007bff; font-weight: 500;">
-        💻 Desarrollado con 💙 por {{ desarrollador }}
+        💻 Desarrollado por {{ desarrollador }}
     </div>
 </div>
 
